@@ -319,8 +319,8 @@ def scarp_forecasts():  # Функция сбора данных с сайтов
                 # print(url_with_date)
                 src = req.text
                 soup = BeautifulSoup(src, "lxml")
-                with open("foreca.html", "w") as file:
-                    file.write(src)
+                # with open("foreca.html", "w") as file:
+                #     file.write(src)
             try:
                 # print(str(date)[11:16])
                 tag = soup.find('strong', string=str(date)[11:16]).parent.parent
@@ -342,7 +342,7 @@ def scarp_forecasts():  # Функция сбора данных с сайтов
     except Exception:
         print(f"Failed scrap data on site {source_name}")
 
-    
+    datetime_row = [date.isoformat() for date in datetime_row]
     forecasts_database_record = (datetime_row, forecasts_data_list)
     
 
