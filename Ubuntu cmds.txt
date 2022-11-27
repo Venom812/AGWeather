@@ -1,0 +1,48 @@
+python3 -m venv venv
+source venv/bin/activate
+deactivate
+pip freeze>requirements.txt
+
+python -m pip install Django
+python -m django --version
+python -m pip install -r requirements.txt
+
+django-admin startproject mysite
+cd mysite
+mkdir dir_name
+rm -rf dir_name
+
+python manage.py runserver
+python manage.py startapp polls
+
+#agrwf004
+git init
+git status
+git push origin main
+git commit -m "my_message"
+git log --graph --oneline --decorate
+
+python manage.py migrate
+
+jupyter notebookmysql
+
+mysql --version
+sudo /etc/init.d/mysql start
+sudo mysql
+mysql -h localhost -u root -p
+mysql -h localhost -u root -p < batch_sql.txt;
+mysqladmin -u root -p shutdown
+
+ssh skorodz4@skorodz4.beget.tech
+r&hejF6z
+ssh localhost -p222
+
+#redis
+redis-server --daemonize yes  
+redis-cli ping
+
+#celery
+kill -9 $(ps aux | grep celery | grep -v grep | awk '{print $2}' | tr '\n'  ' ') > /dev/null 2>&1
+celery -A agweather worker -l info --logfile=celery.log --detach
+celery -A agweather beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+

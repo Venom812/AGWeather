@@ -20,21 +20,7 @@ weather_parameters = (
     'Температура, °С', 'Давление, мм.рт.ст.', 'Скорость ветра, м/с')
 
 
-def scarp_forecasts():  # Функция сбора данных с сайтов прогнозов погоды
-
-    # forecasts_json_filename = datetime.now().replace(minute=0).strftime("forecasts_%d.%m_%H:%M")
-    # folder_database_json = ("database_json/forecasts/")
-    # if not os.path.exists(folder_database_json):
-    #     os.mkdir(folder_database_json)
-    # path_to_json_file = folder_database_json + "/" + forecasts_json_filename + ".json"
-
-    # if os.path.isfile(path_to_json_file):
-    #     with open(path_to_json_file) as file:
-    #         json_data = json.load(file)
-    #         file.close()
-    #         json_data[0] = [datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S') for date_str in json_data[0]]
-    #     return json_data
-
+def scrap_forecasts():  # Функция сбора данных с сайтов прогнозов погоды
 
     # Ряд дат и времени с шагом 6 часов
     datetime_row = DatetimeRow(14).get_row() # Длина ряда 14 суток
@@ -42,8 +28,6 @@ def scarp_forecasts():  # Функция сбора данных с сайтов
     datetime_row_begin = datetime_row[0]
     
     forecasts_data_list = []
-    
-    scrap_source_succeed = False
 
     try: # Сайт прогноза РП5
         source_id = 0  
@@ -54,17 +38,8 @@ def scarp_forecasts():  # Функция сбора данных с сайтов
             # "Cookie":  "__utmz=66441069.1651364377.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); extreme_open=true; _ga=GA1.2.261921522.1651364377; tab_synop=1; tab_wug=1; tab_metar=1; full_table=1; ftab=t6; PHPSESSID=25e0f70662735d7dea1a83c4dd41e2e9; __utmc=66441069; i=4967|7285|7285|7285|7285; iru=4967|7285|7285|7285|7285; ru=Лодейное Поле|Санкт-Петербург|Санкт-Петербург|Санкт-Петербург|Санкт-Петербург; last_visited_page=http://rp5.ru/Погода_в_Санкт-Петербурге; lang=ru; __utma=66441069.261921522.1651364377.1668574755.1668580278.46; __utmt=1; __utmb=66441069.1.10.1668580278; cto_bundle=__utmz=66441069.1651364377.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); extreme_open=true; _ga=GA1.2.261921522.1651364377; tab_synop=1; tab_wug=1; tab_metar=1; full_table=1; ftab=t6; PHPSESSID=25e0f70662735d7dea1a83c4dd41e2e9; __utmc=66441069; __utma=66441069.261921522.1651364377.1668574755.1668580278.46; iru=4967|7285|7285|7285|7285; ru=Лодейное Поле|Санкт-Петербург|Санкт-Петербург|Санкт-Петербург|Санкт-Петербург; __utmb=66441069.3.10.1668580278; cto_bundle=ML561l91ekxEUXN6bE1MZDIyZCUyRjNNJTJGOHJRRk8lMkZiTTdreTB4TUswb2lmaEVkVnRsQlVwTHRQeSUyQmxoN21mcTJ3Z0R2bUNrcURVMTJDWHNiS1Z3WkhLOVZ3MGZjdUJhbWo5OEhxcHlISUtFVXNqRyUyRk5tSHFVajNqNk9CbHZzUHpmT2tjU3VXTmVVb0R1ZE9VUU1pZm4lMkYxSVdzUFElM0QlM0Q; lang=en; i=7285|7285; ien=7285|7285; en=Saint Petersburg|Saint Petersburg; last_visited_page=http://rp5.ru/Weather_in_Saint_Petersburg,_Russia",
             "User-Agent":  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36",
         }
-
         req = requests.get(url, headers=headers)
         src = req.text
-
-        # with open("rp5.html", "w") as file:
-        #     file.write(src)
-        # return
-        
-        # with open("rp5.html") as file:
-        #     src = file.read()
-        # src = req.text
 
         soup = BeautifulSoup(src, "lxml")
         # Получаем данные из таблицы семидневного прогноза
@@ -108,7 +83,8 @@ def scarp_forecasts():  # Функция сбора данных с сайтов
 
         forecasts_data_list.append(((source_name, forecast_sources_colors[source_id]), (t_row, p_row, w_row)))
     except Exception:
-        print(f"Failed scrap data on site {source_name}")
+        scraper_error(source_name)
+        return
 
     try: # Сайт прогноза Яндекс Погода  
         source_id = 1  
@@ -224,7 +200,8 @@ def scarp_forecasts():  # Функция сбора данных с сайтов
 
         forecasts_data_list.append(((source_name, forecast_sources_colors[source_id]), (t_row, p_row, w_row)))
     except Exception:
-        print(f"Failed scrap data on site {source_name}")
+        scraper_error(source_name)
+        return
 
     try: # Сайт Meteoinfo.ru
         source_id = 2  
@@ -285,7 +262,8 @@ def scarp_forecasts():  # Функция сбора данных с сайтов
 
         forecasts_data_list.append(((source_name, forecast_sources_colors[source_id]), (t_row, p_row, w_row)))
     except Exception:
-        print(f"Failed scrap data on site {source_name}")
+        scraper_error(source_name)
+        return
 
     try:  # Сайт Foreca.ru  
         source_id = 3  
@@ -340,23 +318,13 @@ def scarp_forecasts():  # Функция сбора данных с сайтов
 
         forecasts_data_list.append(((source_name, forecast_sources_colors[source_id]), (t_row, p_row, w_row)))
     except Exception:
-        print(f"Failed scrap data on site {source_name}")
+        scraper_error(source_name)
+        return
 
     datetime_row = [date.isoformat() for date in datetime_row]
     forecasts_database_record = (datetime_row, forecasts_data_list)
     
-
-    # with open(f"{folder_database_json}/{forecasts_json_filename}.json", "w", encoding="utf-8") as file:
-    #     json.dump(forecasts_database_record, file, indent=4, sort_keys=True, default=str) #ensure_ascii=False)
-
-    # (дата_вермя_ось_Х, дата_вермя_вспл), ((имя источника, цвет),(тепература, давление, скорость ветра))
     return forecasts_database_record
-
-# def read_forecasts_record_from_json_file(path_to_json_file):
-#     with open(path_to_json_file) as file:
-#         data = json.load(file)
-#     print(data[0][])
-#     return "fuck"
 
 class DatetimeRow():    # Класс формирует строку дат для массива прогноза
     def __init__(self, forec_len_days):
@@ -381,6 +349,10 @@ class DatetimeRow():    # Класс формирует строку дат дл
         else:
             dt = dt.replace(hour=bhour)
         return dt
+
+# Функци отработки неудачи извлечения данных из источника
+def scraper_error(source_name):
+    print(f"Failed scrap data on site: {source_name}. Exit scraper.")
 
 # Функция извлечения из источника начальной даты/вермемени прогноза
 def func_source_begin_datetime(begin_month, begin_day, begin_hour):
@@ -416,12 +388,5 @@ def add_none_or_cut_exc(source_begin_datetime, datetime_row_begin):
 
 if __name__ == '__main__':
 
-    # for i in scarp_forecasts(1):
-    forecasts = scarp_forecasts()
+    forecasts = scrap_forecasts()
     print(forecasts)
-    # quit()
-
-    # forecast_all = [forecast_scarp(id,14) for id in range(0, len(forecast_sources_names)-1)]
-
-    # forecast_all_T = list(zip(*forecast_all)) #[list(i) for i in zip(*forecast_all)]
-    # forecast_all_T[1] = forecast_all_T[1][0]

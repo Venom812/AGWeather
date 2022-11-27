@@ -4,3 +4,7 @@ from django.db import models
 class ForecastsRecord(models.Model):
     rec_date = models.DateTimeField()
     rec_data = models.JSONField()
+
+class ArchiveRecord(models.Model):
+    rec_date = models.DateTimeField()
+    rec_data = models.JSONField()

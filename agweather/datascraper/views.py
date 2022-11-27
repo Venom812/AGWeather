@@ -1,9 +1,12 @@
 from django.http import HttpResponse
-from .models import ForecastsRecord
+from .models import ForecastsRecord, ArchiveRecord
 
-a = ForecastsRecord.objects.latest('rec_date').rec_date
+def forecasts(request):
+    a = str(ForecastsRecord.objects.latest('rec_date').rec_data)
+    b = str(ForecastsRecord.objects.latest('rec_date').rec_date)
+    return HttpResponse(f"Hello, world. You're at the FORECASTS.____{a}___{b}")
 
-print(a)
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the datascraper index." + str(a))
+def archive(request):
+    x = str(ArchiveRecord.objects.latest('rec_date').rec_data)
+    y = str(ArchiveRecord.objects.latest('rec_date').rec_date)
+    return HttpResponse(f"Hello, world. You're in the ARCHIVE.____{x}___{y}")
