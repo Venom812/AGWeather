@@ -21,8 +21,8 @@
                         </select>
                 </div>
                 <div class="form-group col-md-4 mb-0">
-                    <label for="amount">Период прогноза, дней:</label>
-                    <input id='amount' type="number" min="1" max="14" class="form-control"
+                    <label for="forecast-length">Период прогноза, дней:</label>
+                    <input id='forecast-length' type="number" min="1" max="14" class="form-control"
                         placeholder="Введите кол-во дней" {% if forecast_length %} value="{{ forecast_length }}" 
                         {% endif %} name="forecast-length" onchange="submit();">
                 </div>

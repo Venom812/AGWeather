@@ -20,11 +20,17 @@
                             {% endfor %}
                         </select>
                 </div>
+                <div class="form-group col-md-4 mb-0" style="display:none;">
+                    <label for="forecasts-foresight">Упреждение пргонозов, дней:</label>
+                    <input id='forecasts-foresight' type="number" min="1" max="10" class="form-control"
+                        placeholder="Введите кол-во дней" {% if forecasts_foresight %} value="{{ forecasts_foresight }}" 
+                        {% endif %} name="forecasts-foresight" onchange="submit();">
+                </div>
                 <div class="form-group col-md-4 mb-0">
-                    <label for="amount">Период прогноза, дней:</label>
-                    <input id='amount' type="number" min="1" max="14" class="form-control"
-                        placeholder="Введите кол-во дней" {% if forecast_length %} value="{{ forecast_length }}" 
-                        {% endif %} name="forecast-length" onchange="submit();">
+                    <label for="archive-length">Период архива, дней:</label>
+                    <input id='archive-length' type="number" min="1" max="30" class="form-control"
+                        placeholder="Введите кол-во дней" {% if archive_length %} value="{{ archive_length }}" 
+                        {% endif %} name="archive-length" onchange="submit();">
                 </div>
             </div>
 
@@ -34,22 +40,13 @@
     </div>
 
     <!-- Content Row -->
-
     <div class="row">
-
-        <!-- Area Chart -->
         <div class="chart-area" id="my_chart_area">
-            <!-- <div>     -->
             <canvas id="myAreaChart"></canvas>
             <script>
-                // myChart({{ labels|safe }}, {{ data|safe }}, "{{ label }}", "{{ color }}", "{{ weather_parameter }}");
-                myChart({{ chartjs_data| safe }}, {{ chartjs_options| safe }});
-                                // myTemp({{ forecast|safe }});
+                archiveChart({{ chartjs_data| safe }}, {{ chartjs_options| safe }});
             </script>
         </div>
-
     </div>
-    <!-- <body onload="Testingq('zzz','qqqq');"></body> -->
-
 </div>
 {% endblock %}
