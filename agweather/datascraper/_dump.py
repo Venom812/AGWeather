@@ -23,12 +23,12 @@ print(a)
 #     os.mkdir(folder_database_json)
 # path_to_json_file = folder_database_json + "/" + forecasts_json_filename + ".json"
 
-# if os.path.isfile(path_to_json_file):
-#     with open(path_to_json_file) as file:
-#         json_data = json.load(file)
-#         file.close()
-#         json_data[0] = [datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S') for date_str in json_data[0]]
-#     return json_data
+if os.path.isfile(path_to_json_file):
+    with open(path_to_json_file) as file:
+        json_data = json.load(file)
+        file.close()
+        json_data[0] = [datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S') for date_str in json_data[0]]
+    return json_data
 
 # with open("rp5.html", "w") as file:
 #     file.write(src)

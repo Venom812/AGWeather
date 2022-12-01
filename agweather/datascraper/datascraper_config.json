@@ -1,0 +1,102 @@
+{
+    "forecast_sources": [
+        {
+            "name": "РП55",
+            "url": "https://rp5.ru/%D0%9F%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0_%D0%B2_%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3%D0%B5",
+            "chart_color": "#1E90FF",
+            "headers": {
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+            }
+        },
+        {
+            "name": "Яндекс Погода",
+            "url": "https://yandex.ru/pogoda/details/10-day-weather",
+            "chart_color": "#FF0000",
+            "cookies": {
+                "yandexuid": "6369593541650645601",
+                "yuidss": "6369593541650645601",
+                "_ym_uid": "1650645655385690765",
+                "my": "YwA=",
+                "font_loaded": "YSv1",
+                "gdpr": "0",
+                "amcuid": "3558357171651151328",
+                "mda": "0",
+                "_ym_d": "1667327762",
+                "ymex": "1966005601.yrts.1650645601#1982746660.yrtsi.1667386660",
+                "skid": "8561683441667921562",
+                "uxs_uid": "d9045580-644e-11ed-8f6a-438c9740570a",
+                "spravka": "dD0xNjY4OTg1MTY0O2k9OTEuMTIyLjEwMy44MztEPTQzNEIzM0JGN0M0OTUyNDE4MzZCRjNCQUQ5NDE0MTkyNTJFNUIxOUU3OEFBOUQxNUM4N0Y2NDcwMEQzRjVGNkZDQjc4MUZEQzt1PTE2Njg5ODUxNjQ5Nzc5Nzc3NjU7aD05NDczMWE5NTYzNjM3YzA4MTE4M2ZiOTg0ODc0NDJhOQ==",
+                "L": "cncHQ10GQgxsBlR6eH9Sf3t+A29mbVdBJyMeKFcJNFYO.1669151070.15169.344711.46c0e96d1f5ad73f65f7ef3cbd2b7c1d",
+                "yandex_login": "skorodeev",
+                "is_gdpr": "0",
+                "is_gdpr_b": "CIy8DhD4lgEoAg==",
+                "i": "l82pTH4T3P8IKl/tUzegXixvAjS+TIPLTCtMWfTkf7bmqzZCDJMb7QlL44V/Ew7ipLXIWxhXkIIW/iDzJN3HbXq39Ug=",
+                "Session_id": "3:1669682764.5.1.1650956094897:YLBGsg:26.1.2:1|1130000058249596.4971645.2.2:4971645|127962874.18194976.2.2:18194976|3:10261851.128761.rtfJ7yqe4c8YrIQboQj7GhZ7gzQ",
+                "sessionid2": "3:1669682764.5.1.1650956094897:YLBGsg:26.1.2:1|1130000058249596.4971645.2.2:4971645|127962874.18194976.2.2:18194976|3:10261851.128761.fakesign0000000000000000000",
+                "_ym_isad": "2",
+                "ys": "wprid.1669866831414484-4054910936116698103-sas2-0212-sas-l7-balancer-8080-BAL-1596",
+                "yabs-frequency": "/5/0W0K005VXsCO5e1Z/xeoL_g7CbMIqIIFRhd4u2UHwHh599mMSPDY-XpIzIwH99z2-uwJD4Cfzj4aWntjk9vpsuaYqIK2m8OCwW-74HxH989X13ZpXhknkj4aW-7tUvdeZqaEqII2-Hmw6ByK9ORH9e6b_gdMKKKv0jKc00PNZTDXB_tbCj4aWsN29jnIpaasqII3QagJCGnBgShH981tEUwKHQlDzj4aWOqhql5GgddYrIG02/",
+                "yp": "1671953118.csc.1#1700810964.pgp.1_27821249#1669879764.mcv.2#1669879764.mcl.1xopkpp#1669879764.szm.1:1920x1080:1920x929#1701398488.p_sw.1669862488#1700902233.p_undefined.1669366232#1701219333.stltp.serp_bk-map_1_1669683333",
+                "_ym_visorc": "b",
+                "_yasc": "9ch/JPYM3pwmFE2Tw3BawNK7S5GgJGqoe7KE1e6HkYKFIo1m5TGJo0AD1XHoOzeR6N/P+DVxeEWHhcLfVGGi5Bo=",
+                "cycada": "gTifmKTkEUO0f5MMle0HzDj/GrbqKvz4H/4PMPQbAfQ="
+            },
+            "headers": {
+                "authority": "yandex.ru",
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "accept-language": "en-GB,en;q=0.9,ru-RU;q=0.8,ru;q=0.7,en-US;q=0.6",
+                "cache-control": "max-age=0",
+                "cookie": "yandexuid=6369593541650645601; yuidss=6369593541650645601; _ym_uid=1650645655385690765; my=YwA=; font_loaded=YSv1; gdpr=0; amcuid=3558357171651151328; mda=0; _ym_d=1667327762; ymex=1966005601.yrts.1650645601#1982746660.yrtsi.1667386660; skid=8561683441667921562; uxs_uid=d9045580-644e-11ed-8f6a-438c9740570a; spravka=dD0xNjY4OTg1MTY0O2k9OTEuMTIyLjEwMy44MztEPTQzNEIzM0JGN0M0OTUyNDE4MzZCRjNCQUQ5NDE0MTkyNTJFNUIxOUU3OEFBOUQxNUM4N0Y2NDcwMEQzRjVGNkZDQjc4MUZEQzt1PTE2Njg5ODUxNjQ5Nzc5Nzc3NjU7aD05NDczMWE5NTYzNjM3YzA4MTE4M2ZiOTg0ODc0NDJhOQ==; L=cncHQ10GQgxsBlR6eH9Sf3t+A29mbVdBJyMeKFcJNFYO.1669151070.15169.344711.46c0e96d1f5ad73f65f7ef3cbd2b7c1d; yandex_login=skorodeev; is_gdpr=0; is_gdpr_b=CIy8DhD4lgEoAg==; i=l82pTH4T3P8IKl/tUzegXixvAjS+TIPLTCtMWfTkf7bmqzZCDJMb7QlL44V/Ew7ipLXIWxhXkIIW/iDzJN3HbXq39Ug=; Session_id=3:1669682764.5.1.1650956094897:YLBGsg:26.1.2:1|1130000058249596.4971645.2.2:4971645|127962874.18194976.2.2:18194976|3:10261851.128761.rtfJ7yqe4c8YrIQboQj7GhZ7gzQ; sessionid2=3:1669682764.5.1.1650956094897:YLBGsg:26.1.2:1|1130000058249596.4971645.2.2:4971645|127962874.18194976.2.2:18194976|3:10261851.128761.fakesign0000000000000000000; _ym_isad=2; ys=wprid.1669866831414484-4054910936116698103-sas2-0212-sas-l7-balancer-8080-BAL-1596; yabs-frequency=/5/0W0K005VXsCO5e1Z/xeoL_g7CbMIqIIFRhd4u2UHwHh599mMSPDY-XpIzIwH99z2-uwJD4Cfzj4aWntjk9vpsuaYqIK2m8OCwW-74HxH989X13ZpXhknkj4aW-7tUvdeZqaEqII2-Hmw6ByK9ORH9e6b_gdMKKKv0jKc00PNZTDXB_tbCj4aWsN29jnIpaasqII3QagJCGnBgShH981tEUwKHQlDzj4aWOqhql5GgddYrIG02/; yp=1671953118.csc.1#1700810964.pgp.1_27821249#1669879764.mcv.2#1669879764.mcl.1xopkpp#1669879764.szm.1:1920x1080:1920x929#1701398488.p_sw.1669862488#1700902233.p_undefined.1669366232#1701219333.stltp.serp_bk-map_1_1669683333; _ym_visorc=b; _yasc=9ch/JPYM3pwmFE2Tw3BawNK7S5GgJGqoe7KE1e6HkYKFIo1m5TGJo0AD1XHoOzeR6N/P+DVxeEWHhcLfVGGi5Bo=; cycada=gTifmKTkEUO0f5MMle0HzDj/GrbqKvz4H/4PMPQbAfQ=",
+                "device-memory": "8",
+                "downlink": "3.5",
+                "dpr": "1.25",
+                "ect": "4g",
+                "if-none-match": "W/\"2fc05-/Vh1ghSpwk/NOiUkjzA8MLUcQqg\"",
+                "referer": "https://yandex.ru/pogoda/saint-petersburg?via=reg&lat=59.938951&lon=30.315635",
+                "rtt": "100",
+                "sec-ch-ua": "\"Google Chrome\";v=\"107\", \"Chromium\";v=\"107\", \"Not=A?Brand\";v=\"24\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": "\"Windows\"",
+                "sec-fetch-dest": "document",
+                "sec-fetch-mode": "navigate",
+                "sec-fetch-site": "same-origin",
+                "sec-fetch-user": "?1",
+                "upgrade-insecure-requests": "1",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
+                "viewport-width": "1056"
+            },
+            "params": {
+                "lat": "59.938951",
+                "lon": "30.315635",
+                "via": "ms"
+            }
+        },
+        {
+            "name": "Meteoinfo.ru",
+            "url": "https://meteoinfo.ru/forecasts",
+            "chart_color": "#00FF00",
+            "headers": {
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "Cookie": "66c548aa3ec10b30907b199d946947a3=acaabv5dqa640hjt4tri78ql72; tmr_lvid=4b60becf8aecbedfc54868a7108788c3; tmr_lvidTS=1663960116332; _ym_uid=1663960117360748641; _ym_d=1663960117; _ym_isad=2; stan=1468; lstan=1468; START_POGODA_P=1468; tmr_detect=0%7C1663967623293; tmr_reqNum=55",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+            }
+        },
+        {
+            "name": "Foreca.ru",
+            "url": "https://www.foreca.ru/Russia/Saint_Petersburg?details=",
+            "chart_color": "#FBFF00",
+            "cookies": {
+                "nlv": "Russia%2FSaint_Petersburg-FCA-cnU6MTAwNDk4ODE3",
+                "_ga": "GA1.1.699186197.1668585320",
+                "cc2018": "0bacfd01-bd10-4b5f-a264-2596b77220cc",
+                "st2": "lang%3Dru%26units%3Dmetricmmhg%26tf%3D24h%26ml%3D%26u%3DTRRTQZUZYY0A",
+                "_ga_V376KP84L7": "GS1.1.1669435053.16.0.1669435053.0.0.0"
+            },
+            "headers": {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
+            }
+        }
+    ]
+}

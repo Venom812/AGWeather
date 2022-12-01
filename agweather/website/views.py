@@ -87,7 +87,7 @@ def forecast(request):
         'forecast_sources': zip(forecast_sources_names, forecast_sources_urls),
     }
 
-    print(context)
+    # print(context)
     return render(request=request, template_name='forecast.html', context=context)
 
 
@@ -155,7 +155,7 @@ def archive(request):
         'labels': labels,
         'datasets': datasets,
     }
-    print(chartjs_data)
+    # print(chartjs_data)
     # print(datasets[0]['data'])
 
     last_database_refresh = ForecastsRecord.objects.latest(
