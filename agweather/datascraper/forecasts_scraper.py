@@ -1,36 +1,16 @@
-"""Module scrapes data from forecast sources and stores it in SQL database."""
+"""Module scrapes data from forecast sources."""
 from datetime import datetime, timedelta
 import re
-from bs4 import BeautifulSoup
-import requests
 from json import load
-
-# forecast_sources_names = ('РП5', 'Яндекс Погода',
-#                           'Meteoinfo.ru', 'Foreca.ru')
-# forecast_sources_urls = ("https://rp5.ru/%D0%9F%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0_%D0%B2_%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3%D0%B5",
-#                          "https://yandex.ru/pogoda/details/10-day-weather",
-#                          "https://meteoinfo.ru/forecasts",
-#                          # After '=' add required date in format "YYYYMMDD"
-#                          "https://www.foreca.ru/Russia/Saint_Petersburg?details=",
-#                          )
-# # Colors on the sites line charts
-# forecast_sources_colors = (
-#     '#1E90FF', '#FF0000', '#00FF00', '#fbff00')
-# # Scraping weather parameters. Possible to extend this list
-weather_parameters = (
-    'Температура, °С', 'Давление, мм.рт.ст.', 'Скорость ветра, м/с')
-
-# with open("agweather/datascraper/datascraper_config.json") as file:
-with open("agweather/datascraper/datascraper_config.json") as file:
-    datascraper_config = load(file)
-
-# names = config_json["forecast_sources"][1]['name']
-
-# print(names)
+import requests
+from bs4 import BeautifulSoup
 
 
-def scrap_forecasts():
-    """Run scarping and storing data process."""
+def scrap_forecasts(path_to_config_file):
+    """Run scarping and storing forecasts data process."""
+    # Reading configuration file
+    with open(path_to_config_file, 'r', encoding='UTF-8') as file:
+        datascraper_config = load(file)
 
     # Required datetime row
     datetime_row = DatetimeRow(14).get_row()
@@ -43,7 +23,8 @@ def scrap_forecasts():
 
         source_config = datascraper_config["forecast_sources"][0]
 
-        req = requests.get(url=source_config['url'], headers=source_config['headers'],
+        req = requests.get(url=source_config['url'],
+                           headers=source_config['headers'],
                            timeout=10)
         src = req.text
         soup = BeautifulSoup(src, "lxml")
@@ -60,9 +41,7 @@ def scrap_forecasts():
                 .next_sibling.next_sibling.get_text())
         )
 
-        # Сalculation of None values additions at the
-        # data row beginnings or their end trimmings to
-        # align their lengths acording to the reqiured datetime row
+        # Сut or add None
         add_none, cut_exc = add_none_or_cut_exc(
             source_start_datetime, datetime_row_start)
 
@@ -89,7 +68,7 @@ def scrap_forecasts():
             ((source_config['name'], source_config['chart_color']),
              (t_row, p_row, w_row)))
 
-    except Exception:
+    except AttributeError:
         scraper_error(source_config['name'])
         return
 
@@ -97,7 +76,8 @@ def scrap_forecasts():
 
         source_config = datascraper_config["forecast_sources"][1]
 
-        response = requests.get(url=source_config['url'], params=source_config['params'], 
+        response = requests.get(url=source_config['url'],
+                                params=source_config['params'],
                                 cookies=source_config['cookies'],
                                 headers=source_config['headers'], timeout=10)
         src = response.text
@@ -115,9 +95,7 @@ def scrap_forecasts():
             9  # Morning
         )
 
-        # Сalculation of None values additions at the
-        # data row beginnings or their end trimmings to
-        # align their lengths acording to the reqiured datetime row
+        # Сut or add None
         add_none, cut_exc = add_none_or_cut_exc(
             source_start_datetime, datetime_row_start)
 
@@ -150,7 +128,7 @@ def scrap_forecasts():
             ((source_config['name'], source_config['chart_color']),
              (t_row, p_row, w_row)))
 
-    except Exception:
+    except AttributeError:
         scraper_error(source_config['name'])
         return
 
@@ -158,7 +136,8 @@ def scrap_forecasts():
 
         source_config = datascraper_config["forecast_sources"][2]
 
-        req = requests.get(source_config['url'], headers=source_config['headers'], timeout=10)
+        req = requests.get(source_config['url'],
+                           headers=source_config['headers'], timeout=10)
         src = req.text
         soup = BeautifulSoup(src, "lxml")
 
@@ -177,9 +156,7 @@ def scrap_forecasts():
             start_hour
         )
 
-        # Сalculation of None values additions at the
-        # data row beginnings or their end trimmings to
-        # align their lengths acording to the reqiured datetime row
+        # Сut or add None
         add_none, cut_exc = add_none_or_cut_exc(
             source_start_datetime, datetime_row_start)
         add_none = add_none[:len(add_none)//2]
@@ -207,7 +184,7 @@ def scrap_forecasts():
             ((source_config['name'], source_config['chart_color']),
              (t_row, p_row, w_row)))
 
-    except Exception:
+    except AttributeError:
         scraper_error(source_config['name'])
         return
 
@@ -221,12 +198,15 @@ def scrap_forecasts():
         # Walking in cycle by forecast day web pages
         old_url_with_date = ''
         for date in datetime_row[:36]:
-            url_with_date = source_config['url'] + str(date).replace('-', '')[:8]
+            url_with_date = source_config['url'] + \
+                str(date).replace('-', '')[:8]
             # Open next forecast web page
             if url_with_date != old_url_with_date:
                 old_url_with_date = url_with_date
-                req = requests.get(url_with_date, cookies=source_config['cookies'],
-                                   headers=source_config['headers'], timeout=10)
+                req = requests.get(url_with_date,
+                                   cookies=source_config['cookies'],
+                                   headers=source_config['headers'],
+                                   timeout=10)
                 src = req.text
                 soup = BeautifulSoup(src, "lxml")
 
@@ -251,7 +231,7 @@ def scrap_forecasts():
             ((source_config['name'], source_config['chart_color']),
              (t_row, p_row, w_row)))
 
-    except Exception:
+    except AttributeError:
         scraper_error(source_config['name'])
         return
 
@@ -266,7 +246,7 @@ class DatetimeRow():
     """Represent datetime for forecast record."""
 
     def __init__(self, forec_len_days):
-
+        """Intiation of dattimerow."""
         start_date = self.start_forec_date()
         # Forecast data step = 6 hours
         step = timedelta(hours=6)
@@ -274,12 +254,13 @@ class DatetimeRow():
             start_date + i*step for i in range(0, forec_len_days*4)]
 
     def get_row(self):
-        """Returns datetime row."""
+        """Return datetime row."""
         return self.datetime_row
 
     @staticmethod
     def start_forec_date():
-        """Determines the start date of the forecast:
+        """Determine the start date of the forecast.
+
         today at 3:00, 9:00, 15:00 or 21:00.
         """
         start_dt = datetime.now()  # Local time now
@@ -295,13 +276,11 @@ class DatetimeRow():
 
 def scraper_error(source_name):
     """Print error message after scraper failure."""
-
     print(f"Failed scrap data on site: {source_name}. Exit scraper.")
 
 
 def func_source_start_datetime(start_month, start_day, start_hour):
     """Calculate the starting date of the forecast source."""
-
     start_year = datetime.now().year
 
     # Processing the transition through the new year
@@ -313,8 +292,7 @@ def func_source_start_datetime(start_month, start_day, start_hour):
 
 
 def month_rusname_to_number(name):
-    """Translates russian month name to its number."""
-
+    """Translate russian month name to its number."""
     month_numbers = {'янв': 1, 'фев': 2, 'мар': 3, 'апр': 4, 'май': 5,
                      'июн': 6, 'июл': 7, 'авг': 8, 'сен': 9, 'окт': 10,
                      'ноя': 11, 'дек': 12}
@@ -325,7 +303,8 @@ def month_rusname_to_number(name):
 
 
 def add_none_or_cut_exc(source_start_datetime, datetime_row_start):
-    """Сalculates of None values additions at the
+    """Сalculates of None values additions at the.
+
     data row beginnings or their end trimmings to
     align their lengths acording to the reqiured datetime row.
     """
@@ -343,5 +322,6 @@ def add_none_or_cut_exc(source_start_datetime, datetime_row_start):
 
 if __name__ == '__main__':
 
-    forecasts = scrap_forecasts()
+    forecasts = scrap_forecasts(
+        "agweather/datascraper/datascraper_config.json")
     print(forecasts)

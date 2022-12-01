@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'datascraper',
     'django_celery_beat',
-    'website',
+    'website'
 ]
 
 MIDDLEWARE = [

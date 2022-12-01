@@ -107,6 +107,8 @@ venv.bak/
 redis-stable.tar.gz
 redis-stable/
 agweather/beget/
-.vscode/settings.json
 
 ubuntu_cmds.txt
+.vscode
+.vscode/launch.json
+/vendor
