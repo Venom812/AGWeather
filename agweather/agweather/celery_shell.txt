@@ -1,8 +1,0 @@
-#redis
-redis-server --daemonize yes  
-redis-cli ping
-
-#celery
-kill -9 $(ps aux | grep celery | grep -v grep | awk '{print $2}' | tr '\n'  ' ') > /dev/null 2>&1
-celery -A agweather worker -l info --logfile=celery.log --detach
-celery -A agweather beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
