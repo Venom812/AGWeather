@@ -7,7 +7,7 @@ from .forecasts_scraper import month_rusname_to_number
 
 
 def scrap_archive(path_to_config_file):
-    """Run scarping and storing archive data process."""
+    """Run scarping archive data process."""
     # Reading configuration file
     with open(path_to_config_file, 'r', encoding='UTF-8') as file:
         datascraper_config = load(file)
@@ -53,8 +53,9 @@ def scrap_archive(path_to_config_file):
             p_row.append(float(trow.find_all('td')[-27].div.get_text()))
             w_row.append(trow.find_all('td')[-22])
 
-        source_datetime_row = [f"{year_list[i]}-{month_day_list[i]}T{time_list[i]}:00:00"
-                               for i in range(0, len(source_datetime_row))]
+        source_datetime_row = \
+            [f"{year_list[i]}-{month_day_list[i]}T{time_list[i]}:00:00"
+             for i in range(0, len(source_datetime_row))]
         w_row = [int(w.div.get_text().strip().split(' ')[0][1:])
                  if w.div else 0 for w in w_row]
 
