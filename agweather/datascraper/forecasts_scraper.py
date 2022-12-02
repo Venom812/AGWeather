@@ -4,6 +4,8 @@ import re
 from json import load
 import requests
 from bs4 import BeautifulSoup
+from urllib.request import urlopen
+
 
 
 def scrap_forecasts(path_to_config_file):
@@ -25,8 +27,12 @@ def scrap_forecasts(path_to_config_file):
 
         req = requests.get(url=source_config['url'],
                            headers=source_config['headers'],
+                           cookies=source_config['cookies'],
+                           proxies=datascraper_config['proxies'],
                            timeout=10)
+        # return req
         src = req.text
+
         soup = BeautifulSoup(src, "lxml")
 
         # Parsing forecast table data
